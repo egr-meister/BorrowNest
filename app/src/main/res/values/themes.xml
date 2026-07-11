@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base app theme used by the Activity window before Compose takes over. -->
+    <style name="Theme.BorrowNest" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:navigationBarColor">@color/app_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowBackground">@color/app_background</item>
+    </style>
+
+    <!-- Static splash theme (custom, stable, no heavy animation). -->
+    <style name="Theme.BorrowNest.Starting" parent="Theme.BorrowNest">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

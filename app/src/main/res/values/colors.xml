@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="given_terracotta">#C96F52</color>
+    <color name="borrowed_indigo">#536FA8</color>
+    <color name="spine_charcoal">#2C3036</color>
+    <color name="app_background">#F4F1EA</color>
+    <color name="ic_launcher_background">#F4F1EA</color>
+    <color name="white">#FFFFFF</color>
+</resources>
