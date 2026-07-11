@@ -114,7 +114,7 @@ fun SettingsScreen(
             }
 
             SettingsSection("Data") {
-                ActionRow("View statistics", onOpenStatistics)
+                ActionRow("View statistics", onClick = onOpenStatistics)
                 ActionRow("Show onboarding again") { viewModel.showOnboardingAgain() }
                 ActionRow("Archive all returned items") { dialog = SettingsDialog.ArchiveAll }
                 ActionRow("Clear archive", destructive = true) { dialog = SettingsDialog.ClearArchive }

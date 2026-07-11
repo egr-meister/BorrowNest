@@ -43,6 +43,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.borrownest.app.model.ItemDirection
 import com.borrownest.app.model.ItemLifecycleState
 import com.borrownest.app.ui.components.ConfirmDialog
+import com.borrownest.app.ui.components.ConfirmDialogWithContent
 import com.borrownest.app.ui.components.Copy
 import com.borrownest.app.ui.components.DateField
 import com.borrownest.app.ui.components.StatusChip
