@@ -70,9 +70,11 @@ android {
                 signingConfig = releaseSigning
             } else {
                 // Fail clearly instead of silently falling back to the debug key.
+                // Only guard the real release-artifact tasks. Matching by substring
+                // would wrongly fire for testReleaseUnitTest and other Release-named
+                // tasks in the graph, so match the exact task names.
                 gradle.taskGraph.whenReady {
-                    if (allTasks.any { it.name.contains("Release") &&
-                            (it.name.contains("assemble") || it.name.contains("bundle")) }) {
+                    if (allTasks.any { it.name == "assembleRelease" || it.name == "bundleRelease" }) {
                         throw GradleException(
                             "Release signing is not configured. Provide keystore.properties " +
                                 "or the ANDROID_KEYSTORE_* environment variables. " +
