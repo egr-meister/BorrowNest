@@ -24,16 +24,20 @@ jobs:
 
       - name: Install Android SDK 36 (Platform + Build Tools 36.0.0)
         run: |
-          set -euo pipefail
+          set -eu
           SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
           SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -name sdkmanager -type f 2>/dev/null | head -n1)"
           echo "Using sdkmanager at: $SDKMANAGER (sdk root: $SDK_ROOT)"
           # Accept every license non-interactively. `yes` feeds an unlimited
           # stream of "y", so newly added licenses (Android XR, Google TV, etc.)
           # are all accepted — the setup-android action only feeds a fixed count
-          # and fails when Google adds new license types.
+          # and fails when Google adds new license types. `yes` exits with SIGPIPE
+          # once sdkmanager closes its stdin; that is expected, so this line is
+          # allowed to "fail" (|| true) and pipefail is intentionally NOT set.
           yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" --licenses >/dev/null 2>&1 || true
-          yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" \
+          # Licenses are already accepted above, so install without a pipe. This
+          # command's own exit code is authoritative — a real install failure fails the step.
+          "$SDKMANAGER" --sdk_root="$SDK_ROOT" \
             "platforms;android-36" "build-tools;36.0.0" "platform-tools"
           echo "ANDROID_SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
           echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
