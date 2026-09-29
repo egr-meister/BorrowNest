@@ -25,15 +25,15 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Platform 35 and Build Tools 35.0.0
+      - name: Install Platform 36 and Build Tools 36.0.0
         run: |
           yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+          sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
 
-      - name: Set up Gradle 8.9 (with cache)
+      - name: Set up Gradle 8.11.1 (with cache)
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.9'
+          gradle-version: '8.11.1'
 
       - name: Run unit tests
         run: gradle testReleaseUnitTest --stacktrace
@@ -73,7 +73,7 @@ jobs:
             exit 1
           fi
           echo "Found APK: $APK"
-          BUILD_TOOLS="$ANDROID_HOME/build-tools/35.0.0"
+          BUILD_TOOLS="$ANDROID_HOME/build-tools/36.0.0"
           CERT_OUTPUT=$("$BUILD_TOOLS/apksigner" verify --print-certs "$APK")
           echo "$CERT_OUTPUT"
           if echo "$CERT_OUTPUT" | grep -q "CN=Android Debug"; then

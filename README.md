@@ -134,7 +134,7 @@ Simple MVVM: one local repository (`BorrowRepository`) backed by DataStore Prefe
 ## Requirements and configuration
 
 - **JDK 17** is required.
-- `compileSdk = 35`, `targetSdk = 35`, `minSdk = 24`.
+- `compileSdk = 36`, `targetSdk = 36`, `minSdk = 24`.
 - Portrait orientation is locked; the app is edge-to-edge and respects system insets while keeping system bars visible.
 - **No permissions** are declared in the manifest (no INTERNET, READ_CONTACTS, camera, notifications, location, storage, calendar, Bluetooth, NFC, SMS, or alarm permissions).
 - **16 KB page-size compatibility**: the app uses only Kotlin/Compose/AndroidX with no third-party native binaries, so 16 KB memory-page alignment is satisfied. Still verify the final bundle.
@@ -146,7 +146,7 @@ Simple MVVM: one local repository (`BorrowRepository`) backed by DataStore Prefe
 3. Let Gradle sync. Ensure the Gradle JDK is set to **17** (Settings → Build Tools → Gradle).
 4. Run the `app` configuration on a device or emulator running API 24+.
 
-> This project references Gradle 8.9 via the wrapper properties. If the `gradle/wrapper/gradle-wrapper.jar` and `gradlew`/`gradlew.bat` scripts are not present, generate them once with a local Gradle 8.9 install: `gradle wrapper --gradle-version 8.9`.
+> This project references Gradle 8.11.1 via the wrapper properties. If the `gradle/wrapper/gradle-wrapper.jar` and `gradlew`/`gradlew.bat` scripts are not present, generate them once with a local Gradle 8.11.1 install: `gradle wrapper --gradle-version 8.11.1`.
 
 ## Build instructions
 
@@ -209,7 +209,7 @@ Use the same password for the keystore and key unless you have configured separa
 
 ## GitHub Actions
 
-`.github/workflows/android-build.yml` runs on push to `main` and on manual dispatch. It checks out the repo, sets up JDK 17 and Android SDK Platform 35 + Build Tools 35.0.0, caches Gradle, runs unit tests, decodes `ANDROID_KEYSTORE_BASE64` into a temporary PKCS12 file, exposes signing secrets only as environment variables, builds the signed release **APK** and **AAB**, verifies the APK with `apksigner verify --print-certs`, **fails** if the certificate shows `CN=Android Debug`, and uploads the APK (test artifact) and AAB (Google Play artifact). CI proves compilation, signing, and certificate verification — it is not proof that the app launches. No emulator smoke test is required.
+`.github/workflows/android-build.yml` runs on push to `main` and on manual dispatch. It checks out the repo, sets up JDK 17 and Android SDK Platform 36 + Build Tools 36.0.0, caches Gradle, runs unit tests, decodes `ANDROID_KEYSTORE_BASE64` into a temporary PKCS12 file, exposes signing secrets only as environment variables, builds the signed release **APK** and **AAB**, verifies the APK with `apksigner verify --print-certs`, **fails** if the certificate shows `CN=Android Debug`, and uploads the APK (test artifact) and AAB (Google Play artifact). CI proves compilation, signing, and certificate verification — it is not proof that the app launches. No emulator smoke test is required.
 
 ## apksigner verification
 
@@ -243,7 +243,7 @@ Watch logcat for `ClassNotFoundException`, `NoSuchMethodError`, serialization cr
 
 ## Local functional test checklist
 
-Empty first launch; onboarding and skip-onboarding; add Given item; add Borrowed item; enter person name manually and confirm no contact picker exists; item without a return date; item with a future return date; item due today; overdue historical item; verify Due Soon / Due Today / Overdue; change the Soon threshold; edit item; change direction; change person name; change expected return date; add a note; mark Given item received back; mark Borrowed item returned; undo return; archive returned item; restore archived item; permanently delete archived item; search by item name and person name; filter Given / Borrowed / Overdue / No Return Date; sort by nearest return; open person summary and confirm similar names are not merged; open and filter history; open statistics; trigger due-soon / due-today / overdue in-app reminders and dismiss; disable reminders; archive all returned items; delete all Given records; delete all Borrowed records; reset all local data; relaunch the app; launch in airplane mode and confirm full functionality; confirm no INTERNET permission, no contact permission, no runtime permission dialogs, and no messaging behavior; inspect `adb logcat`; verify the release certificate; verify AAB generation; verify API 35; verify 16 KB page-size compatibility.
+Empty first launch; onboarding and skip-onboarding; add Given item; add Borrowed item; enter person name manually and confirm no contact picker exists; item without a return date; item with a future return date; item due today; overdue historical item; verify Due Soon / Due Today / Overdue; change the Soon threshold; edit item; change direction; change person name; change expected return date; add a note; mark Given item received back; mark Borrowed item returned; undo return; archive returned item; restore archived item; permanently delete archived item; search by item name and person name; filter Given / Borrowed / Overdue / No Return Date; sort by nearest return; open person summary and confirm similar names are not merged; open and filter history; open statistics; trigger due-soon / due-today / overdue in-app reminders and dismiss; disable reminders; archive all returned items; delete all Given records; delete all Borrowed records; reset all local data; relaunch the app; launch in airplane mode and confirm full functionality; confirm no INTERNET permission, no contact permission, no runtime permission dialogs, and no messaging behavior; inspect `adb logcat`; verify the release certificate; verify AAB generation; verify API 36; verify 16 KB page-size compatibility.
 
 ## Data reset behavior
 
